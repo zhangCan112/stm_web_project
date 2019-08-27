@@ -15,7 +15,7 @@ class Login extends Component<IProps> {
         return (
             <Form onSubmit={this.handleSubmit}>
                 <div className="login">
-                    <text className="title">STM登录</text>
+                    <p className="title">STM登录</p>
                     <Form.Item>
                         {getFieldDecorator('username', {
                             rules: [{ required: true, message: '请输入用户名!' }],
@@ -45,8 +45,8 @@ class Login extends Component<IProps> {
                         <Checkbox onChange={this.handleRemember} style={{color: 'white'}}>记住登录信息</Checkbox>
                         <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20}}>登录</Button>
                         <div className='help'>
-                       <Link to="/forget"> <text className='text'><span className='dot'>*</span>忘记密码</text></Link>
-                       <Link to="/register"> <text className='text'>注册新用户</text></Link>
+                       <Link to="/forget"> <p className='text'><span className='dot'>*</span>忘记密码</p></Link>
+                       <Link to="/register"> <p className='text'>注册新用户</p></Link>
                         </div>
                         </div>                                              
                     </Form.Item>
