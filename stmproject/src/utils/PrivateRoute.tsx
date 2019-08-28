@@ -16,7 +16,7 @@ class PrivateRoute extends Component<IProps, IState> {
     timeoutID: NodeJS.Timeout | null = null
 
     render() {        
-        let isAuthenticated = window.sessionStorage.getItem("isLogin") ? true : false
+        let isAuthenticated = window.localStorage.getItem("isLogin") ? true : false
         let { component, ...rest } = this.props
         return isAuthenticated
             ?
