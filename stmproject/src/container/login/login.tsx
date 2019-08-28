@@ -4,6 +4,7 @@ import './login.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import {GET} from "../../utils/request";
 
 interface IProps extends FormComponentProps<any> {
 
@@ -60,9 +61,16 @@ class Login extends Component<IProps> {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            message.success(`${values['username']}登录成功！`);
+            message.success(`${values['username']}登录成功！`); 
+            this.test()           
           } 
         });
+    }
+
+    test = async () => {
+        let res = await GET("/user/login", {username: "zhangcan", password: "1988112"})
+        console.log('Received res: ', res);
+        return ""
     }
 
     handleRemember = (e: CheckboxChangeEvent) => {

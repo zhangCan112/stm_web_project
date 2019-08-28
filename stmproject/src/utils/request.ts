@@ -1,7 +1,6 @@
-var pkg = require("./package.json");
+var pkg = require("../../package.json");
 
 // headers设置Cookie相关的key值
-const CookieKey = "Cookie"
 const SetCookieKey = "Set-Cookie"
 
 // Cookie数据中的约定值的Key值
@@ -20,6 +19,42 @@ export interface ResponseBody<B> {
     msg?: string
 }
 
+//GET GET请求方法 
+export const GET = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
+    let querryStr: string | null = null
+    if (querry && Object.keys(querry).length > 0) {
+        let querryStrArr: string[] = []
+        Object.keys(querry).forEach((key) => {
+            querryStrArr.push(`${key}=${querry[key]}`)
+        })
+        querryStr = querryStrArr.join("&")
+    }    
+    let querryUrl = url 
+    if (querryStr && querryStr.length > 0) {
+        querryUrl = `${url}?${querryStr}`
+    }
+    return request(querryUrl)
+}
+
+//POST POST请求方法 
+export const POST = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
+    
+    return request(url)
+}
+
+//PUT PUT请求方法 
+export const PUT = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
+    
+    return request(url)
+}
+
+//DELETE DELETE请求方法 
+export const DELETE = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
+    
+    return request(url)
+}
+
+
 // request 针对后台API服务接口约定封装的基础业务请求接口
 const request = <B>(input: string, init?: RequestInit): Promise<ResponseBody<B>> => {
     let newInit: RequestInit = { ...init }
@@ -35,7 +70,7 @@ const request = <B>(input: string, init?: RequestInit): Promise<ResponseBody<B>>
         cookie.setCookie(LoginKey, isLogin)
     }
     if (cookie.hasValues) {
-        newInit.headers = { ...newInit.headers, CookieKey: cookie.string() }
+        newInit.headers = { ...newInit.headers, Cookie: cookie.string() }
     }
 
     return fetch(`${commonUrl}${input}`, newInit)
@@ -48,7 +83,7 @@ const request = <B>(input: string, init?: RequestInit): Promise<ResponseBody<B>>
 
 //检查请求状态 200才认为网络服务请求成功
 function checkStatus(response: Response) {
-    if (response.status == 200) {
+    if (response.status === 200) {
         return response
     }
 
@@ -70,16 +105,12 @@ function updateCookie(response: Response) {
 
 // 筛选返回scode==0的返回数据，其他scode将作为错误抛出
 export function filterSuccessCode<B>(response: ResponseBody<B>) {
-    if (response.scode == 0) {
+    if (response.scode === 0) {
         return response;
     }
     throw new Error(response.msg || ServiceErrorMsg)       
 }
 
-
-
-
-export default request
 
 // Cookies 对Cookie操作进行封装
 class Cookies {
