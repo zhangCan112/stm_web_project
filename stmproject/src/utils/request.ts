@@ -30,21 +30,36 @@ export const GET = <B>(url: string, querry?: {[key: string]: string}) : Promise<
 }
 
 //POST POST请求方法 
-export const POST = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
-    
-    return request(url)
+export const POST = <B>(url: string, form?: {[key: string]: any}) : Promise<ResponseBody<B>> => {    
+    let init: RequestInit = {}
+    init.method = "POST"    
+    init.body = JSON.stringify(form)
+    init.headers = {'Content-Type': 'application/json'}
+    return request(url, init)
 }
 
 //PUT PUT请求方法 
-export const PUT = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
-    
-    return request(url)
+export const PUT = <B>(url: string, id?: string, form?: {[key: string]: any}) : Promise<ResponseBody<B>> => {    
+    let init: RequestInit = {}
+    init.method = "PUT"    
+    init.body = JSON.stringify(form)
+    init.headers = {'Content-Type': 'application/json'}
+    let urlStr = url
+    if (id && id.length > 0) {
+        urlStr = `${url}/${id}`
+    }     
+    return request(urlStr, init)
 }
 
 //DELETE DELETE请求方法 
-export const DELETE = <B>(url: string, querry?: {[key: string]: string}) : Promise<ResponseBody<B>> => {
-    
-    return request(url)
+export const DELETE = <B>(url: string, id?: string) : Promise<ResponseBody<B>> => {
+    let init: RequestInit = {}
+    init.method = "DELETE"   
+    let urlStr = url
+    if (id && id.length > 0) {
+        urlStr = `${url}/${id}`
+    }         
+    return request(url, init)    
 }
 
 
@@ -53,7 +68,7 @@ const request = <B>(input: string, init?: RequestInit): Promise<ResponseBody<B>>
     let newInit: RequestInit = { ...init }
     newInit.mode = 'cors'//跨域  
     newInit.credentials = "include"      
-    
+
     return fetch(`${commonUrl}${input}`, newInit)
         .then(checkStatus)        
         .then((response) => {

@@ -4,7 +4,7 @@ import './login.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import {GET} from "../../utils/request";
+import {POST} from "../../utils/request";
 
 interface IProps extends FormComponentProps<any> {
 
@@ -68,7 +68,9 @@ class Login extends Component<IProps> {
     }
 
     test = async () => {
-        let res = await GET("/v1/user/login", {username: "zhangcan", password: "1988112"})
+        let res = await POST("/v1/user", {userName: "zhangcan", password: "1988112", email:"zhangcan@xiaoshouyi.com"}).catch((e:Error) => {
+            console.log('Received res: ', e.message, e.stack);
+        })
         console.log('Received res: ', res);
         return ""
     }
