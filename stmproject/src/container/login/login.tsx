@@ -68,7 +68,7 @@ class Login extends Component<IProps> {
     }
 
     test = async () => {
-        let res = await GET("/user/login", {username: "zhangcan", password: "1988112"})
+        let res = await GET("/v1/user/login", {username: "zhangcan", password: "1988112"})
         console.log('Received res: ', res);
         return ""
     }

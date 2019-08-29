@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
-
+import cookies  from "./cookies"
 
 interface IProps extends RouteComponentProps {
     component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -15,8 +15,8 @@ class PrivateRoute extends Component<IProps, IState> {
 
     timeoutID: NodeJS.Timeout | null = null
 
-    render() {        
-        let isAuthenticated = window.localStorage.getItem("isLogin") ? true : false
+    render() {                
+        let isAuthenticated = cookies.isLogin()        
         let { component, ...rest } = this.props
         return isAuthenticated
             ?
