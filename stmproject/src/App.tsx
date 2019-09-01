@@ -20,7 +20,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path='/login' component={Login} />
-          <Route path='/forget' component={Forget} />
+          <PrivateRoute path='/forget' component={Forget} />
           <Route path='/register' component={Register} />
         </Router>
       </Provider>

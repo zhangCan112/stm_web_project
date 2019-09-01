@@ -59,7 +59,7 @@ export const DELETE = <B>(url: string, id?: string) : Promise<ResponseBody<B>> =
     if (id && id.length > 0) {
         urlStr = `${url}/${id}`
     }         
-    return request(url, init)    
+    return request(urlStr, init)    
 }
 
 

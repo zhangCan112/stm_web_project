@@ -4,7 +4,7 @@ import './login.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import {POST} from "../../utils/request";
+import { POST } from "../../utils/request";
 
 interface IProps extends FormComponentProps<any> {
 
@@ -41,15 +41,15 @@ class Login extends Component<IProps> {
                         )}
                     </Form.Item>
 
-                    <Form.Item> 
+                    <Form.Item>
                         <div className='buttonBox'>
-                        <Checkbox onChange={this.handleRemember} style={{color: 'white'}}>记住登录信息</Checkbox>
-                        <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20}}>登录</Button>
-                        <div className='help'>
-                       <Link to="/forget"> <p className='text'><span className='dot'>*</span>忘记密码</p></Link>
-                       <Link to="/register"> <p className='text'>注册新用户</p></Link>
+                            <Checkbox onChange={this.handleRemember} style={{ color: 'white' }}>记住登录信息</Checkbox>
+                            <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20 }}>登录</Button>
+                            <div className='help'>
+                                <Link to="/forget"> <p className='text'><span className='dot'>*</span>忘记密码</p></Link>
+                                <Link to="/register"> <p className='text'>注册新用户</p></Link>
+                            </div>
                         </div>
-                        </div>                                              
                     </Form.Item>
                 </div>
             </Form>
@@ -59,16 +59,16 @@ class Login extends Component<IProps> {
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-            message.success(`${values['username']}登录成功！`); 
-            this.test()           
-          } 
+            if (!err) {
+                console.log('Received values of form: ', values);
+                message.success(`${values['username']}登录成功！`);
+                this.test()
+            }
         });
     }
 
     test = async () => {
-        let res = await POST("/v1/user", {userName: "zhangcan", password: "1988112", email:"zhangcan@xiaoshouyi.com"}).catch((e:Error) => {
+        let res = await POST("/v1/user", { userName: "zhangcan", password: "1988112", email: "zhangcan@xiaoshouyi" }).catch((e: Error) => {
             console.log('Received res: ', e.message, e.stack);
         })
         console.log('Received res: ', res);
