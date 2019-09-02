@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
-import './login.css';
+import styles from './login.module.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -15,8 +15,8 @@ class Login extends Component<IProps> {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit}>
-                <div className="login">
-                    <p className="title">STM登录</p>
+                <div className={styles.login}>
+                    <p className={styles.title}>STM登录</p>
                     <Form.Item>
                         {getFieldDecorator('username', {
                             rules: [{ required: true, message: '请输入用户名!' }],
@@ -42,12 +42,12 @@ class Login extends Component<IProps> {
                     </Form.Item>
 
                     <Form.Item>
-                        <div className='buttonBox'>
+                        <div className={styles.buttonBox}>
                             <Checkbox onChange={this.handleRemember} style={{ color: 'white' }}>记住登录信息</Checkbox>
                             <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20 }}>登录</Button>
-                            <div className='help'>
-                                <Link to="/forget"> <p className='text'><span className='dot'>*</span>忘记密码</p></Link>
-                                <Link to="/register"> <p className='text'>注册新用户</p></Link>
+                            <div className={styles.help}>
+                                <Link to="/forget"> <p className={styles.text}><span className={styles.dot}>*</span>忘记密码</p></Link>
+                                <Link to="/register"> <p className={styles.text}>注册新用户</p></Link>
                             </div>
                         </div>
                     </Form.Item>

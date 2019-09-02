@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Tooltip, Icon, Button } from 'antd';
 import { FormComponentProps } from 'antd/lib/form/Form';
-import './register.css';
+import styles from './register.module.css';
 
 interface Iprops extends FormComponentProps<any> {
 
@@ -40,8 +40,8 @@ class RegistrationForm extends Component<Iprops> {
         };
 
         return (
-            <div className='container'>
-                <p className="title">用户注册</p>
+            <div className={styles.container}>
+                <p className={styles.title}>用户注册</p>
                 <Form {...formItemLayout} onSubmit={this.handleSubmit}>                    
                     <Form.Item label="邮箱">
                         {getFieldDecorator('email', {
