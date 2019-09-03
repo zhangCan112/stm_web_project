@@ -6,6 +6,7 @@ import { POST, filterSuccessCode } from "../../utils/request";
 import URLS from "../../utils/urls";
 import { delay } from "../../utils/tools";
 import history from '../../history'
+import { Link } from 'react-router-dom';
 
 
 const userNameKey = "userName"
@@ -112,9 +113,10 @@ class RegistrationForm extends Component<Iprops> {
                         })(<Input.Password onBlur={this.handleConfirmBlur} style={{ width: 340, height: 40, opacity: 0.85 }} />)}
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, opacity: 0.85 }}>
-                            注册
-                        </Button>
+                    <div className={styles.buttonBox}>                            
+                            <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20 }}>注册</Button>
+                            <Link to="/login"> <p className={styles.text}>>返回登录</p></Link>
+                        </div>
                     </Form.Item>
                 </Form>
             </div>
@@ -124,8 +126,7 @@ class RegistrationForm extends Component<Iprops> {
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
+            if (!err) {                
                 this.postRegisterInfo(values)
             }
         });
@@ -187,7 +188,9 @@ class RegistrationForm extends Component<Iprops> {
 
         // 用email的前缀名做用户名
         let email = form.getFieldValue(emailKey)
-        form.setFieldsValue({ userName: email.split('@')[0] })
+        if (email) {
+            form.setFieldsValue({ userName: email.split('@')[0] })            
+        }        
     }
 }
 

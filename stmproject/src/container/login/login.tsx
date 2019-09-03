@@ -4,7 +4,10 @@ import styles from './login.module.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { POST } from "../../utils/request";
+import { GET, filterSuccessCode } from "../../utils/request";
+import URLS from "../../utils/urls";
+import { delay } from "../../utils/tools";
+import history from '../../history'
 
 interface IProps extends FormComponentProps<any> {
 
@@ -60,19 +63,27 @@ class Login extends Component<IProps> {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                message.success(`${values['username']}登录成功！`);
-                this.test()
+                this.login(values)
             }
         });
     }
 
-    test = async () => {
-        let res = await POST("/v1/user", { userName: "zhangcan", password: "1988112", email: "zhangcan@xiaoshouyi" }).catch((e: Error) => {
-            console.log('Received res: ', e.message, e.stack);
-        })
-        console.log('Received res: ', res);
-        return ""
+    login = async (values: { [key: string]: any }) => {
+        let hide = message.loading("登录中...", 0)
+        let result = await GET(URLS.LOGIN, values)
+            .then(filterSuccessCode)
+            .catch((e: Error) => {
+                return e
+            })
+        await delay(1000)
+        hide()
+        if (result instanceof Error) {
+            let err = result as Error
+            message.error(err.message)
+            return
+        }
+
+        message.success("登录成功！即将跳转到主页...", 0.75, ()=>{ history.replace('/home') })
     }
 
     handleRemember = (e: CheckboxChangeEvent) => {

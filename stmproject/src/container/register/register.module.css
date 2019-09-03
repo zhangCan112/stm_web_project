@@ -11,3 +11,9 @@
     line-height: 46px;
     margin-left: 120px;
 }
+
+.buttonBox {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+}
