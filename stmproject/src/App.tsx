@@ -5,13 +5,12 @@ import { Provider } from 'react-redux';
 import './App.css';
 import { Router, Route } from 'react-router';
 import PrivateRoute from "./utils/PrivateRoute";
-import { createBrowserHistory } from 'history'
+import browserHistory from './history'
 
 import Login from './container/login/login';
 import Forget from './container/forget/forget';
 import Register from './container/register/register';
 
-const browserHistory = createBrowserHistory()
 const store = createStore(rootReducer)
 
 class App extends Component {  
