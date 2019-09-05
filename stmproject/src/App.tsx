@@ -20,9 +20,9 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route.Login path='/home' component={Home} />
-          <Route.Logout path='/login' component={Login}/>
-          <Route.Logout path='/forget' component={Forget}/>
-          <Route.Logout path='/register' component={Register}/>
+          <Route.Logout path='/login' component={Login} />
+          <Route.Logout path='/forget' component={Forget} />
+          <Route.Logout path='/register' component={Register} />
         </Router>
       </Provider>
     );

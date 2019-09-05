@@ -2,6 +2,8 @@
     position: 'fixed';
     z-index: 1;
     width: '100%';
+    display: flex;
+    justify-content: space-around;
 }
 
 .menu {
@@ -14,4 +16,20 @@
     background: rgba(255, 255, 255, 0.2);
     margin: 16px 24px 16px 0;
     float: left;
+}
+
+.navlinksBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 350px;
+}
+
+.navLinkNormal {
+    flex: 1;
+    opacity: 0.65;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 22px;
 }
