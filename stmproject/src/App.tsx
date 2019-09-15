@@ -11,6 +11,7 @@ import Login from './container/login/login';
 import Forget from './container/forget/forget';
 import Register from './container/register/register';
 import Home from './container/home/home';
+import Work from './container/work/work';
 
 const store = createStore(rootReducer)
 
@@ -19,7 +20,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route.Login path='/home' component={Home} />
+          <Route.Login path='/home' component={Home} >
+            <Route.Login path='/home1' component={Work} />
+            <Route.Login path='/home2' component={Login} />
+            <Route.Login path='/home3' component={Login} />
+          </Route.Login>
           <Route.Logout path='/login' component={Login} />
           <Route.Logout path='/forget' component={Forget} />
           <Route.Logout path='/register' component={Register} />
