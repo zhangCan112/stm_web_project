@@ -70,7 +70,9 @@ class CustomRoute extends Component<IProps, IState> {
         let { component, ...rest } = this.props
         return !isAuthenticated
             ?
-            (<Route {...this.props} />)
+            (<Route {...this.props}>
+                {this.props.children}
+             </Route>)
             :
             <Route {...rest}
                 render={(props: RouteComponentProps<any>) => {

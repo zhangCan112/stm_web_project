@@ -28,6 +28,7 @@ export default class Home extends Component {
                 </Header>
                 <Content style={{ padding: '0 50px', marginTop: 24 }}>
                     <div style={{ background: '#fff', padding: 24, minHeight: 530 }}>Content</div>
+                    {this.props.children}
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>©2019 风林火山技术部出品</Footer>
             </Layout>
