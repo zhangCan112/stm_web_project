@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { createStore } from "redux";
-import rootReducer from "./reducer/index";
+import rootReducer from "./reducers/index";
 import { Provider } from 'react-redux';
 import './App.css';
-import { Router } from 'react-router';
+import { Router, Switch, Redirect, Route as R } from 'react-router';
 import Route from "./utils/Route";
 import browserHistory from './history'
 
-import Login from './container/login/login';
-import Forget from './container/forget/forget';
-import Register from './container/register/register';
-import Home from './container/home/home';
-import Work from './container/work/work';
+import Login from './pages/login/login';
+import Forget from './pages/forget/forget';
+import Register from './pages/register/register';
+import Workbench from './pages/workbench/workbench';
+import NotFoundPage from './pages/404/404'
 
 const store = createStore(rootReducer)
 
@@ -20,14 +20,14 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Home>
-            <Route.Login path='home1' component={Work} />
-            <Route.Login path='home2' component={Login} />
-            <Route.Login path='home3' component={Login} />
-          </Home>
-          <Route.Logout path='/login' component={Login} />
-          <Route.Logout path='/forget' component={Forget} />
-          <Route.Logout path='/register' component={Register} />
+          <Switch>
+            <Redirect exact from='/' to='work' />
+            <Route.Login path='/Workbench' component={Workbench} />
+            <Route.Logout path='/login' component={Login} />
+            <Route.Logout path='/forget' component={Forget} />
+            <Route.Logout path='/register' component={Register} />
+            <R component={NotFoundPage} />
+          </Switch>
         </Router>
       </Provider>
     );

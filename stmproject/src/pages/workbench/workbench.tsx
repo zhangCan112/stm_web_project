@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Tooltip, Icon, Button, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form/Form';
-
+import Home from "../../containers/home/home";
 
 
 
@@ -10,12 +10,14 @@ interface Iprops extends FormComponentProps<any> {
 
 }
 
-class Work extends Component<Iprops> {
+class Workbench extends Component<Iprops> {
     
     render() {
-        return <div>this is work!</div>
+        return <Home>
+            <div>this is work!</div>
+        </Home>
     }
         
 }
 
-export default Work
+export default Workbench

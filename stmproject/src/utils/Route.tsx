@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteChildrenProps } from 'react-router';
 import cookies from "./cookies"
 
 interface IRouteProps extends RouteComponentProps {
     component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+    render?: ((props: RouteComponentProps<any>) => React.ReactNode);
+    children?: ((props: RouteChildrenProps<any>) => React.ReactNode) | React.ReactNode;
     path?: string | string[];
+    exact?: boolean;
+    sensitive?: boolean;
+    strict?: boolean;
 }
 
 class Login extends Component<IRouteProps> {
@@ -20,7 +26,7 @@ class Logout extends Component<IRouteProps> {
 }
 
 
-interface IProps extends RouteComponentProps, IRouteProps {    
+interface IProps extends RouteComponentProps, IRouteProps {
     mode?: "login" | "logout" | "none"
 }
 
@@ -29,7 +35,7 @@ interface IState {
 }
 
 class CustomRoute extends Component<IProps, IState> {
-   
+
     timeoutID: NodeJS.Timeout | null = null
 
     render() {
@@ -72,7 +78,7 @@ class CustomRoute extends Component<IProps, IState> {
             ?
             (<Route {...this.props}>
                 {this.props.children}
-             </Route>)
+            </Route>)
             :
             <Route {...rest}
                 render={(props: RouteComponentProps<any>) => {
@@ -104,7 +110,7 @@ class HomeLoading extends Component {
 }
 
 export default {
-   Custom: withRouter(CustomRoute),
-   Login: withRouter(Login),
-   Logout: withRouter(Logout),
+    Custom: withRouter(CustomRoute),
+    Login: withRouter(Login),
+    Logout: withRouter(Logout),
 };
