@@ -21,7 +21,7 @@ class App extends Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Switch>
-            <Redirect exact from='/' to='work' />
+            <Redirect exact from='/' to='Workbench' />
             <Route.Login path='/Workbench' component={Workbench} />
             <Route.Logout path='/login' component={Login} />
             <Route.Logout path='/forget' component={Forget} />

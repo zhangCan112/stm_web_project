@@ -65,7 +65,7 @@ class CustomRoute extends Component<IProps, IState> {
                             const { history } = this.props;
                             history.replace("/login");
                             this.timeoutID = null
-                        }, 1000)
+                        }, 500)
                     }
                     return <LoginLoading></LoginLoading>
                 }} />
@@ -85,9 +85,9 @@ class CustomRoute extends Component<IProps, IState> {
                     if (this.timeoutID == null) {
                         this.timeoutID = setTimeout(() => {
                             const { history } = this.props;
-                            history.replace("/home");
+                            history.replace("/");
                             this.timeoutID = null
-                        }, 1000)
+                        }, 500)
                     }
                     return <HomeLoading></HomeLoading>
                 }} />

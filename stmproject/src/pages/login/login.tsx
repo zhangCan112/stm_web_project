@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
-import styles from './login.module.css';
+import css from './login.module.css';
 import { FormComponentProps } from 'antd/lib/form/Form';
 import { Link } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
@@ -18,8 +18,8 @@ class Login extends Component<IProps> {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit}>
-                <div className={styles.login}>
-                    <p className={styles.title}>STM登录</p>
+                <div className={css.login}>
+                    <p className={css.title}>STM登录</p>
                     <Form.Item>
                         {getFieldDecorator('username', {
                             rules: [{ required: true, message: '请输入用户名!' }],
@@ -45,12 +45,12 @@ class Login extends Component<IProps> {
                     </Form.Item>
 
                     <Form.Item>
-                        <div className={styles.buttonBox}>
+                        <div className={css.buttonBox}>
                             <Checkbox onChange={this.handleRemember} style={{ color: 'white' }}>记住登录信息</Checkbox>
                             <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20 }}>登录</Button>
-                            <div className={styles.help}>
-                                <Link to="/forget"> <p className={styles.text}><span className={styles.dot}>*</span>忘记密码</p></Link>
-                                <Link to="/register"> <p className={styles.text}>注册新用户</p></Link>
+                            <div className={css.help}>
+                                <Link to="/forget"> <p className={css.text}><span className={css.dot}>*</span>忘记密码</p></Link>
+                                <Link to="/register"> <p className={css.text}>注册新用户</p></Link>
                             </div>
                         </div>
                     </Form.Item>
@@ -83,7 +83,7 @@ class Login extends Component<IProps> {
             return
         }
 
-        message.success("登录成功！即将跳转到主页...", 0.75, ()=>{ history.replace('/home') })
+        message.success("登录成功！即将跳转到主页...", 0.75, ()=>{ history.replace('/') })
     }
 
     handleRemember = (e: CheckboxChangeEvent) => {
