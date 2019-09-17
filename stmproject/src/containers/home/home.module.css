@@ -11,11 +11,18 @@
 }
 
 .logo {
-    width: 120px;
-    height: 31px;
-    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: left;
+    align-items: center;    
+    height: 31px;    
     margin: 16px 24px 16px 0;
     float: left;
+}
+
+.logoTitle {
+    color: #FFFFFF;
+    margin-left: 13px; 
+    font-size: 15px;   
 }
 
 .navlinksBox {
@@ -59,6 +66,7 @@
 
 .userInfo {
     padding-left: 5px;
+    border: 0px solid rgba(0, 0, 0, 0);    
 }
 
 .userInfo:active {
