@@ -7,6 +7,7 @@ import URLS from "../../utils/urls";
 import { delay } from "../../utils/tools";
 import history from '../../history'
 import { Link } from 'react-router-dom';
+import * as Path from '../../utils/routepaths'
 
 
 const userNameKey = "userName"
@@ -115,7 +116,7 @@ class RegistrationForm extends Component<Iprops> {
                     <Form.Item {...tailFormItemLayout}>
                     <div className={styles.buttonBox}>                            
                             <Button type="primary" htmlType="submit" style={{ width: 340, height: 40, fontSize: 20 }}>注册</Button>
-                            <Link to="/login"> <p className={styles.text}>>返回登录</p></Link>
+                            <Link to={Path.Login}> <p className={styles.text}>>返回登录</p></Link>
                         </div>
                     </Form.Item>
                 </Form>
@@ -147,7 +148,7 @@ class RegistrationForm extends Component<Iprops> {
             return
         }
 
-        message.success("注册成功！即将跳转登录页面...", 2.5, ()=>{ history.replace('/login') })
+        message.success("注册成功！即将跳转登录页面...", 2.5, ()=>{ history.replace(Path.Login) })
     }
 
     handleConfirmBlur = (e: React.FocusEvent<HTMLInputElement>) => {

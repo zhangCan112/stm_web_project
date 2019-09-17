@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import { RouteChildrenProps } from 'react-router';
 import cookies from "./cookies"
+import * as Path from '../utils/routepaths'
 
 interface IRouteProps extends RouteComponentProps {
     component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -63,7 +64,7 @@ class CustomRoute extends Component<IProps, IState> {
                     if (this.timeoutID == null) {
                         this.timeoutID = setTimeout(() => {
                             const { history } = this.props;
-                            history.replace("/login");
+                            history.replace(Path.Login);
                             this.timeoutID = null
                         }, 500)
                     }
@@ -85,7 +86,7 @@ class CustomRoute extends Component<IProps, IState> {
                     if (this.timeoutID == null) {
                         this.timeoutID = setTimeout(() => {
                             const { history } = this.props;
-                            history.replace("/");
+                            history.replace(Path.Home);
                             this.timeoutID = null
                         }, 500)
                     }
