@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
 import { RouteChildrenProps } from 'react-router';
 import cookies from "./cookies"
-import * as Path from '../utils/routepaths'
+import * as Path from './routepaths'
 
 interface IRouteProps extends RouteComponentProps {
     component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
