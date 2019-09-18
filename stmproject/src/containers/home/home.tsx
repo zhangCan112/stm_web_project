@@ -133,9 +133,8 @@ export default class Home extends Component<IProps, IState> {
             let err = result as Error
             message.error(err.message)
             return
-        }
-
-        message.success("登出成功！", 0.5, ()=>{ history.replace('/') })
+        }       
+        message.success("登出成功！", 0.5, ()=>{ history.replace('/login') })
     }
 
 }
