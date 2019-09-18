@@ -1,0 +1,31 @@
+import React, { Component } from 'react';
+import { Timeline, Icon, Avatar, Button, Popover, message } from 'antd';
+import css from './tomato.module.css';
+
+
+interface IProps {
+
+}
+
+interface IState {
+
+}
+
+export default class Tomato extends Component<IProps, IState> {
+    render() {
+        return (
+            <div className={css.container}>
+                <Button className={css.button}>
+                    <Icon type="caret-right" />开始FeedBack12345
+                </Button>
+                <div>2018年03月18日</div>
+                <Timeline pending="正在进行FeedBack12345" reverse={true}>
+                    <Timeline.Item >9:00-10:20 活动记录草稿 </Timeline.Item>
+                    <Timeline.Item>10:30-11:20 紧急bug：Feedback-12315</Timeline.Item>
+                    <Timeline.Item>13:30-14:20 多文档上传 </Timeline.Item>
+                    <Timeline.Item>14:30-15:20 团队成员继承 </Timeline.Item>
+                </Timeline>,
+            </div>
+        )
+    }
+}
