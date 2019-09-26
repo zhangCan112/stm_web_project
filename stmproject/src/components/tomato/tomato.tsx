@@ -13,25 +13,24 @@ interface IState {
 }
 
 export default class Tomato extends Component<IProps, IState> {
-    
+
     state = {
         count: 0
     }
 
     constructor(props: IProps) {
-        super(props)   
-        countdown((lefts)=>{
-            console.log("====>",lefts)
-            this.setState({count: lefts})
-        }, 30, 1000)          
-    }    
+        super(props)
+        countdown((lefts) => {
+            console.log("====>", lefts)
+            this.setState({ count: lefts })
+        }, 30, 1000)
+    }
 
     render() {
         return (
-            <div className={css.container}>
-                
-                <Button className={css.button}>                 
-                <Icon type="caret-right" />开始FeedBack1234{this.state.count}
+            <div className={css.container}>                                                
+                <Button className={css.button}>
+                    <Icon type="caret-right" />开始FeedBack1234{this.state.count}
                 </Button>
                 <div>2018年03月18日</div>
                 <Timeline pending="正在进行FeedBack12345" reverse={true}>
@@ -39,7 +38,7 @@ export default class Tomato extends Component<IProps, IState> {
                     <Timeline.Item>10:30-11:20 紧急bug：Feedback-12315</Timeline.Item>
                     <Timeline.Item>13:30-14:20 多文档上传 </Timeline.Item>
                     <Timeline.Item>14:30-15:20 团队成员继承 </Timeline.Item>
-                </Timeline>                
+                </Timeline>
             </div>
         )
     }
