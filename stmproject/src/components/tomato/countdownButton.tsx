@@ -64,11 +64,31 @@ export default class CountdownButton extends Component<IProps, IState> {
     }
 
     render() {
-        
+        let lefts = this.state.leftSeconds || 0
+        let totalTime = this.getTotalTime()        
+        let percent =  0;
+        if (totalTime > 0) {
+            percent = 1 - (lefts / totalTime)            
+        }
+
+        let progressOverStyle = { backgroundColor: '#00000000'}
+        let progressClipStyle = { backgroundColor: '#00000000'} as any
+        if (this.state.stage == CountdownStage.Normal) {
+            progressOverStyle = { backgroundColor: '#00000000'}
+            progressClipStyle = { backgroundColor: '#00000000'}
+        } else {
+            progressOverStyle = { backgroundColor: 'green'}
+            progressClipStyle = { backgroundColor: 'red', width: `${percent*100}%`}
+        }
+
         return (
-            <Button className={css.button} onClick={this.onClick}>
-                <Icon type={this.getButtonIcon()} />{this.getButtonTitle()}
-            </Button>
+            <div className={css.progressOver} style={progressOverStyle} onClick={this.onClick}>
+                <div style={progressClipStyle}>
+                    <div className={css.button} >
+                        <Icon style={{marginRight: 5}} type={this.getButtonIcon()} /> {this.getButtonTitle()}
+                    </div>
+                </div>
+            </div>
         )
     }
 
@@ -86,50 +106,50 @@ export default class CountdownButton extends Component<IProps, IState> {
         }
     }
 
-    startWork = () => {        
+    startWork = () => {
         this.timeHandler = countdown(
             (lefts: number) => {
                 this.setState({
                     stage: CountdownStage.Working,
                     leftSeconds: lefts
                 })
-                if (lefts == 0) {  
+                if (lefts == 0) {
                     this.endWork()
                     this.startRest()
-                }                
-             },
+                }
+            },
             this.props.workMinutes * 60,
             1000)
     }
 
-    startRest = () => {                    
+    startRest = () => {
         this.timeHandler = countdown(
             (resetLefts: number) => {
                 this.setState({
                     stage: CountdownStage.Resting,
                     leftSeconds: resetLefts
-                })                            
+                })
             },
             this.props.restMinutes * 60,
             1000)
-    }  
+    }
 
     endWork = () => {
-        this.timeHandler &&  this.timeHandler()
-        this.props.onEnd && this.props.onEnd(CountdownStage.Working)                
+        this.timeHandler && this.timeHandler()
+        this.props.onEnd && this.props.onEnd(CountdownStage.Working)
     }
-    
+
     endRest = () => {
-        this.timeHandler &&  this.timeHandler()
+        this.timeHandler && this.timeHandler()
         this.props.onEnd && this.props.onEnd(CountdownStage.Resting)
         this.setState({
             stage: CountdownStage.Normal,
-        })        
+        })
     }
 
 
     terminateWork = () => {
-        this.timeHandler &&  this.timeHandler()
+        this.timeHandler && this.timeHandler()
         this.props.onTerminated && this.props.onTerminated(CountdownStage.Working)
         this.setState({
             stage: CountdownStage.Normal,
@@ -137,7 +157,7 @@ export default class CountdownButton extends Component<IProps, IState> {
     }
 
     terminateRest = () => {
-        this.timeHandler &&  this.timeHandler()
+        this.timeHandler && this.timeHandler()
         this.props.onTerminated && this.props.onTerminated(CountdownStage.Resting)
         this.setState({
             stage: CountdownStage.Normal,
@@ -149,7 +169,7 @@ export default class CountdownButton extends Component<IProps, IState> {
         let lefts = this.state.leftSeconds || 0
         switch (this.state.stage) {
             case CountdownStage.Working:
-                btnTitle = `处理${this.props.title}...${this.secondsToTime(lefts)}`
+                btnTitle = `处理${this.props.title}`
                 break;
             case CountdownStage.Resting:
                 btnTitle = `休息中`
@@ -161,23 +181,34 @@ export default class CountdownButton extends Component<IProps, IState> {
         return btnTitle;
     }
 
-    getButtonIcon = () => {             
+    getButtonIcon = () => {
         switch (this.state.stage) {
             case CountdownStage.Working:
-                return "loading";   
+                return "loading";
             case CountdownStage.Resting:
-                return "clock-circle";   
+                return "clock-circle";
             default:
-                return "play-circle";                
-        }        
+                return "play-circle";
+        }
+    }
+
+    getTotalTime = () => {
+        switch (this.state.stage) {
+            case CountdownStage.Working:
+                return this.props.workMinutes * 60;
+            case CountdownStage.Resting:
+                return this.props.restMinutes * 60;
+            default:
+                return 0;
+        }
     }
 
 
-    secondsToTime = (seconds: number) => {    
-        let mintinues = Math.floor(seconds/60)
-        let restSeconds = seconds%60
-        return  (mintinues == 0  ? '' : `${Math.ceil(seconds/60)}分`) + 
-                (seconds%60 == 0 ? '' : `${seconds%60}秒`)
+    secondsToTime = (seconds: number) => {
+        let mintinues = Math.floor(seconds / 60)
+        let restSeconds = seconds % 60
+        return (mintinues == 0 ? '' : `${Math.ceil(seconds / 60)}分`) +
+            (seconds % 60 == 0 ? '' : `${seconds % 60}秒`)
     }
 
 }
