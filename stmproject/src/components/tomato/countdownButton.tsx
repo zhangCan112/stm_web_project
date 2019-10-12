@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Icon, Button } from 'antd';
+import { Icon, Modal } from 'antd';
 import { countdown } from "../../utils/tools";
 import css from './tomato.module.css';
+const { confirm } = Modal;
 
 enum CountdownStage {
     /**
@@ -65,27 +66,27 @@ export default class CountdownButton extends Component<IProps, IState> {
 
     render() {
         let lefts = this.state.leftSeconds || 0
-        let totalTime = this.getTotalTime()        
-        let percent =  0;
+        let totalTime = this.getTotalTime()
+        let percent = 0;
         if (totalTime > 0) {
-            percent = 1 - (lefts / totalTime)            
+            percent = 1 - (lefts / totalTime)
         }
 
-        let progressOverStyle = { backgroundColor: '#00000000'}
-        let progressClipStyle = { backgroundColor: '#00000000'} as any
+        let progressOverStyle = { backgroundColor: '#FFFFFF' }
+        let progressClipStyle = { backgroundColor: '#FFFFFF' } as any
         if (this.state.stage == CountdownStage.Normal) {
-            progressOverStyle = { backgroundColor: '#00000000'}
-            progressClipStyle = { backgroundColor: '#00000000'}
+            progressOverStyle = { backgroundColor: '#FFFFFF' }
+            progressClipStyle = { backgroundColor: '#FFFFFF' }
         } else {
-            progressOverStyle = { backgroundColor: 'green'}
-            progressClipStyle = { backgroundColor: 'red', width: `${percent*100}%`}
+            progressOverStyle = { backgroundColor: '#FFFFFF' }
+            progressClipStyle = { backgroundColor: '#4A90E2', width: `${percent * 100}%` }
         }
 
         return (
             <div className={css.progressOver} style={progressOverStyle} onClick={this.onClick}>
                 <div style={progressClipStyle}>
                     <div className={css.button} >
-                        <Icon style={{marginRight: 5}} type={this.getButtonIcon()} /> {this.getButtonTitle()}
+                        <Icon style={{ marginRight: 5 }} type={this.getButtonIcon()} /> {this.getButtonTitle()}
                     </div>
                 </div>
             </div>
@@ -95,7 +96,7 @@ export default class CountdownButton extends Component<IProps, IState> {
     onClick = () => {
         switch (this.state.stage) {
             case CountdownStage.Working:
-                this.terminateWork()
+                this.onWorking()
                 break;
             case CountdownStage.Resting:
                 this.terminateRest()
@@ -106,6 +107,24 @@ export default class CountdownButton extends Component<IProps, IState> {
         }
     }
 
+    onWorking = () => {
+        if (this.state.leftSeconds && this.state.leftSeconds > 0) {
+            confirm({
+                content: '您目前正在一个番茄工作时间中，要放弃这个番茄吗?',
+                okText: '是的',
+                cancelText: '取消',
+                onOk: () => {
+                    this.terminateWork()
+                },
+                onCancel: () => { },
+            });
+        } else {  
+            //记录当前工作弹窗                   
+            this.endWork()
+            this.startRest()
+        }
+    }
+
     startWork = () => {
         this.timeHandler = countdown(
             (lefts: number) => {
@@ -113,13 +132,22 @@ export default class CountdownButton extends Component<IProps, IState> {
                     stage: CountdownStage.Working,
                     leftSeconds: lefts
                 })
-                if (lefts == 0) {
-                    this.endWork()
-                    this.startRest()
-                }
             },
             this.props.workMinutes * 60,
             1000)
+    }
+
+    endWork = () => {
+        this.timeHandler && this.timeHandler()
+        this.props.onEnd && this.props.onEnd(CountdownStage.Working)
+    }
+
+    terminateWork = () => {
+        this.timeHandler && this.timeHandler()
+        this.props.onTerminated && this.props.onTerminated(CountdownStage.Working)
+        this.setState({
+            stage: CountdownStage.Normal,
+        })
     }
 
     startRest = () => {
@@ -134,23 +162,9 @@ export default class CountdownButton extends Component<IProps, IState> {
             1000)
     }
 
-    endWork = () => {
-        this.timeHandler && this.timeHandler()
-        this.props.onEnd && this.props.onEnd(CountdownStage.Working)
-    }
-
     endRest = () => {
         this.timeHandler && this.timeHandler()
         this.props.onEnd && this.props.onEnd(CountdownStage.Resting)
-        this.setState({
-            stage: CountdownStage.Normal,
-        })
-    }
-
-
-    terminateWork = () => {
-        this.timeHandler && this.timeHandler()
-        this.props.onTerminated && this.props.onTerminated(CountdownStage.Working)
         this.setState({
             stage: CountdownStage.Normal,
         })
@@ -163,6 +177,20 @@ export default class CountdownButton extends Component<IProps, IState> {
             stage: CountdownStage.Normal,
         })
     }
+
+    showConfirm = () => {
+        confirm({
+            title: 'Do you want to delete these items?',
+            content: 'When clicked the OK button, this dialog will be closed after 1 second',
+            onOk() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+                }).catch(() => console.log('Oops errors!'));
+            },
+            onCancel() { },
+        });
+    }
+
 
     getButtonTitle = () => {
         let btnTitle = `开始${this.props.title}`

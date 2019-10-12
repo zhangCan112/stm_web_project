@@ -25,6 +25,8 @@ export const delay = async (millisecond: number) => {
 export const countdown = (handler:(lefts: number)=>void, count: number, interval: number = 1000) => {
     let start = new Date().getTime()    
     let end = new Date(start + (count * interval)).getTime()    
+    //立即开始
+    handler(Math.ceil(count))
     let intervalHandler = setInterval(()=>{
         let now = new Date().getTime()
         let lefts = end - now
