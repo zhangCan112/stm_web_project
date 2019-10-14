@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Icon, Timeline, List } from 'antd';
 import css from './gtd.module.css';
+import TaskCell from "./task";
 import InfiniteScroll from 'react-infinite-scroller'
 
 interface IProps {
@@ -21,6 +22,13 @@ export default class GTD extends Component<IProps, IState> {
                     placeholder="添加新任务" 
                     suffix={<Icon type="enter" onClick={()=>{}}/>}/>
                 </div>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
+                <TaskCell></TaskCell>
             </div>
         )
     }

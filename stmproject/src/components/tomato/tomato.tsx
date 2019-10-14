@@ -18,10 +18,7 @@ export default class Tomato extends Component<IProps, IState> {
     state = {
 
     }
-
-    constructor(props: IProps) {
-        super(props)
-    }
+    
 
     render() {
         return (
@@ -42,9 +39,9 @@ export default class Tomato extends Component<IProps, IState> {
                                     <div>
                                         <div className={css.titleBox}>
                                             <span className={css.dateTitle}>2018年03月18日</span>
-                                            <span className={css.resultTitle}>完成了3个番茄🍅</span>
+                                            <span className={css.resultTitle}>完成了3个番茄</span>
                                         </div>
-                                        <Timeline pending={item==1 ? "FeedBack12345": undefined} reverse={true}>
+                                        <Timeline pending={item === 1 ? "FeedBack12345": undefined} reverse={true}>
                                             <Timeline.Item >9:00-10:20 活动记录草稿 </Timeline.Item>
                                             <Timeline.Item>10:30-11:20 紧急bug：Feedback-12315</Timeline.Item>
                                             <Timeline.Item>13:30-14:20 多文档上传 </Timeline.Item>

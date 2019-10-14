@@ -1,6 +1,3 @@
-import { number } from "prop-types";
-
-
 
 /**
  * 延时毫秒执行

@@ -74,7 +74,7 @@ export default class CountdownButton extends Component<IProps, IState> {
 
         let progressOverStyle = { backgroundColor: '#FFFFFF' }
         let progressClipStyle = { backgroundColor: '#FFFFFF' } as any
-        if (this.state.stage == CountdownStage.Normal) {
+        if (this.state.stage === CountdownStage.Normal) {
             progressOverStyle = { backgroundColor: '#FFFFFF' }
             progressClipStyle = { backgroundColor: '#FFFFFF' }
         } else {
@@ -193,8 +193,7 @@ export default class CountdownButton extends Component<IProps, IState> {
 
 
     getButtonTitle = () => {
-        let btnTitle = `开始${this.props.title}`
-        let lefts = this.state.leftSeconds || 0
+        let btnTitle = `开始${this.props.title}`        
         switch (this.state.stage) {
             case CountdownStage.Working:
                 btnTitle = `处理${this.props.title}`
@@ -235,8 +234,8 @@ export default class CountdownButton extends Component<IProps, IState> {
     secondsToTime = (seconds: number) => {
         let mintinues = Math.floor(seconds / 60)
         let restSeconds = seconds % 60
-        return (mintinues == 0 ? '' : `${Math.ceil(seconds / 60)}分`) +
-            (seconds % 60 == 0 ? '' : `${seconds % 60}秒`)
+        return (mintinues === 0 ? '' : `${mintinues}分`) +
+            (restSeconds === 0 ? '' : `${restSeconds}秒`)
     }
 
 }
