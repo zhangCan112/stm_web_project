@@ -44,7 +44,7 @@ export default class Home extends Component<IProps, IState> {
 
     render() {
         return (
-            <Layout style={{ height: '100vh' }}>
+            <Layout style={{ height: '100vh', minHeight:'700px' }}>
                 <Header className={css.header} style={{ background: "#4A90E2" }}>
                     <div className={css.logo} >
                         <img

@@ -1,0 +1,12 @@
+.container {
+    display: flex;    
+    min-height: 100vh;
+    width: 80vw;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.space {
+    width: 2vw;
+}

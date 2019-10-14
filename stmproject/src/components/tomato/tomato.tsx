@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Timeline, List, Icon, Progress, Button, Popover, message } from 'antd';
-import { countdown } from "../../utils/tools";
+import { Timeline, List } from 'antd';
 import CountdownButton from "./countdownButton";
 import css from './tomato.module.css';
 import InfiniteScroll from 'react-infinite-scroller'
