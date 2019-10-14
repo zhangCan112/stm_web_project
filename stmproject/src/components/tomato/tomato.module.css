@@ -1,26 +1,26 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     border: 1px solid #1890FF;
     border-radius: 4px;
     width: 502px;
-    min-height: 352px;
-    padding: 25px 32px 25px 32px;
+    height: 352px;
+    padding: 25px 32px 25px 32px;    
 }
 
 
 .progressOver {
-      border: 1px solid #1890FF;
-      border-radius: 4px;           
-      padding: 1px;
+    border: 1px solid #1890FF;
+    border-radius: 4px;
+    padding: 1px;
 }
 
-.button {    
+.button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;        
+    justify-content: center;
     border-radius: 4px;
     width: 439px;
     height: 40px;
@@ -29,7 +29,7 @@
     font-size: 16px;
     color: #000000;
     text-align: center;
-    line-height: 24px;    
+    line-height: 24px;
 }
 
 .button:hover {
@@ -51,3 +51,36 @@
     line-height: 24px;
     cursor: pointer;
 }
+
+.titleBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 420px;   
+    margin-bottom: 14px;    
+}
+
+.titleBox .dateTitle {
+    opacity: 0.45;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #000000;
+    line-height: 22px;
+}
+
+.titleBox .resultTitle {
+    opacity: 0.65;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #000000;
+    text-align: right;
+    line-height: 22px;
+}
+
+.recordList {
+    margin-top: 14px;
+    border-radius: 4px;
+    overflow: auto;    
+    height: 300px;
+    width: 439px;    
+  }
